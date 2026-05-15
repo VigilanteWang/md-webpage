@@ -218,19 +218,26 @@ function App() {
                   </div>
                 );
               })}
-              <div className="grid gap-4">
+              <div className="grid gap-4 lg:hidden">
                 {architectureCallouts.map((callout) => (
                   <CalloutCard key={callout.title} callout={callout} />
                 ))}
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-panel">
-              <img
-                src={evidenceImages.keyComponents}
-                alt="SPE Key Components 架构图"
-                className="h-full max-h-[880px] w-full bg-white object-contain p-3"
-              />
+            <div className="space-y-4">
+              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-panel">
+                <img
+                  src={evidenceImages.keyComponents}
+                  alt="SPE Key Components 架构图"
+                  className="max-h-[880px] w-full bg-white object-contain p-3"
+                />
+              </div>
+              <div className="hidden gap-4 lg:grid lg:grid-cols-2">
+                {architectureCallouts.map((callout) => (
+                  <CalloutCard key={callout.title} callout={callout} />
+                ))}
+              </div>
             </div>
           </div>
         </SectionShell>
@@ -243,7 +250,7 @@ function App() {
         >
           <div className="grid gap-5 lg:grid-cols-3">
             {permissionLayers.map((layer) => (
-              <div key={layer.title} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
+              <div key={layer.title} className="min-w-0 rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
                 <div className="flex items-center justify-between gap-3">
                   <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100">
                     {layer.layer}
@@ -254,13 +261,13 @@ function App() {
                 <p className="mt-3 text-sm leading-7 text-slate-300">{layer.description}</p>
                 <div className="mt-5 space-y-3">
                   {layer.items.map((item) => (
-                    <div key={item.name} className="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-                      <p className="text-sm font-semibold text-white">{item.name}</p>
+                    <div key={item.name} className="min-w-0 rounded-2xl border border-white/10 bg-slate-950/35 p-4">
+                      <p className="break-words text-sm font-semibold leading-6 text-white">{item.name}</p>
                       <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
                     </div>
                   ))}
                 </div>
-                {layer.notes ? <p className="mt-5 text-sm leading-6 text-cyan-100">{layer.notes}</p> : null}
+                {layer.notes ? <p className="mt-5 break-words text-sm leading-6 text-cyan-100">{layer.notes}</p> : null}
               </div>
             ))}
           </div>
@@ -316,19 +323,26 @@ function App() {
                   </div>
                 );
               })}
-              <div className="grid gap-4">
+              <div className="grid gap-4 lg:hidden">
                 {sharingCallouts.map((callout) => (
                   <CalloutCard key={callout.title} callout={callout} />
                 ))}
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-panel">
-              <img
-                src={evidenceImages.directAccess}
-                alt="Direct Access 共享权限对照图"
-                className="h-full max-h-[760px] w-full bg-white object-contain p-3"
-              />
+            <div className="space-y-4">
+              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-panel">
+                <img
+                  src={evidenceImages.directAccess}
+                  alt="Direct Access 共享权限对照图"
+                  className="max-h-[760px] w-full bg-white object-contain p-3"
+                />
+              </div>
+              <div className="hidden gap-4 lg:grid lg:grid-cols-2">
+                {sharingCallouts.map((callout) => (
+                  <CalloutCard key={callout.title} callout={callout} />
+                ))}
+              </div>
             </div>
           </div>
         </SectionShell>
@@ -367,15 +381,18 @@ function App() {
             })}
           </div>
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
+          <div className="mt-8 grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
             <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
               <div className="flex items-center gap-3">
                 <Coins className="h-5 w-5 text-cyan-300" />
                 <h3 className="text-xl font-semibold text-white">计费模型</h3>
               </div>
-              <div className="mt-5 space-y-3">
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
                 {pricingFacts.map((fact) => (
-                  <p key={fact} className="rounded-2xl border border-white/10 bg-slate-950/35 px-4 py-3 text-sm text-slate-300">
+                  <p
+                    key={fact}
+                    className="rounded-2xl border border-white/10 bg-slate-950/35 px-4 py-3 text-sm leading-7 text-slate-300"
+                  >
                     {fact}
                   </p>
                 ))}
@@ -389,7 +406,7 @@ function App() {
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 源文档中的标准计费设置流程明确要求 Owning Tenant 管理员准备 Azure 订阅与资源组，并通过 PowerShell 绑定计费。
               </p>
-              <pre className="mt-5 overflow-x-auto rounded-2xl border border-white/10 bg-black/40 p-4 text-sm leading-7 text-cyan-100">
+              <pre className="mt-5 whitespace-pre-wrap break-words rounded-2xl border border-white/10 bg-black/40 p-4 text-sm leading-7 text-cyan-100">
                 <code>{powerShellCommand}</code>
               </pre>
             </div>
